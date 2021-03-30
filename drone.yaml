@@ -1,0 +1,23 @@
+---
+kind: pipeline
+type: kubernetes
+name: build
+
+steps:
+  - name: deploy to not-prod
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    environment:
+      ENVIRONMENT: ${DRONE_DEPLOY_TO}
+      KUBE_SERVER: https://kube-api-notprod.notprod.acp.homeoffice.gov.uk
+      KUBE_TOKEN:
+        from_secret: ${DRONE_DEPLOY_TO/-/_}
+    commands:
+      - ./deploy.sh
+    when:
+      event: promote
+      target:
+        exclude:
+          - "*-dev"
+          - "*-qa"
+          - "*-demo"
+          - "*-prod"
