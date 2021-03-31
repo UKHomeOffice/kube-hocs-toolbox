@@ -11,13 +11,6 @@ trigger:
         - hocs-qax
         
 steps:
-  when:
-    target:
-      include:
-        - "hocs-delta"
-        - "hocs-gamma"
-        - "hocs-qax"
-
   - name: deploy to not-prod
     image: quay.io/ukhomeofficedigital/kd:v1.16.0
     environment:
