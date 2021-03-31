@@ -8,11 +8,12 @@ export REPLICAS="1"
 export AWS_ACCOUNT_ID="449472082214"
 export CLUSTER_NAME="acp-notprod"
 
-if [[${KUBE_NAMESPACE} != "hocs-delta" &&
-     ${KUBE_NAMESPACE} != "hocs-gamma" &&
-     ${KUBE_NAMESPACE} != "hocs-qax"]]; then
-    echo "Can only deploy to hocs-delta, hocs-gamma or hocs-qax" > /dev/termination-log;
-    exit 1;
+export VALID_NAMESPACES=("hocs-gamma" "hocs-delta" "hocs-qax")
+if [[ ${VALID_NAMESPACES[*]} =~ $KUBE_NAMESPACE ]] ; then
+   echo "Passed namespace check"
+else
+   echo "Can only echo to ${VALID_NAMESPACES[@]}" | tee /dev/termination-log;
+   exit 1
 fi
 
 echo
