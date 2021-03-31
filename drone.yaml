@@ -16,8 +16,7 @@ steps:
     when:
       event: promote
       target:
-        exclude:
-          - "*-dev"
-          - "*-qa"
-          - "*-demo"
-          - "*-prod"
+        include:
+          - "hocs-delta"
+          - "hocs-gamma"
+          - "hocs-qax"

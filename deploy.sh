@@ -12,7 +12,7 @@ export VALID_NAMESPACES=("hocs-gamma" "hocs-delta" "hocs-qax")
 if [[ ${VALID_NAMESPACES[*]} =~ $KUBE_NAMESPACE ]] ; then
    echo "Passed namespace check"
 else
-   echo "Can only echo to ${VALID_NAMESPACES[@]}" | tee /dev/termination-log;
+   echo "Can only deploy to ${VALID_NAMESPACES[@]}" | tee /dev/termination-log;
    exit 1
 fi
 
