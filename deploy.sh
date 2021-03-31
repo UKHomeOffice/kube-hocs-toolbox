@@ -2,7 +2,6 @@
 set -euo pipefail
 
 export KUBE_NAMESPACE=${ENVIRONMENT}
-export KUBE_SERVER=${KUBE_SERVER}
 export KUBE_TOKEN=${KUBE_TOKEN}
 export REPLICAS="1"
 export AWS_ACCOUNT_ID="449472082214"
