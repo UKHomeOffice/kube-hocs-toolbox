@@ -3,6 +3,13 @@ kind: pipeline
 type: kubernetes
 name: build
 
+trigger:
+    target:
+      include:
+        - hocs-delta
+        - hocs-gamma
+        - hocs-qax
+        
 steps:
   when:
     target:
