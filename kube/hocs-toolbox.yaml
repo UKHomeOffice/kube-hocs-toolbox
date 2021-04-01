@@ -5,6 +5,8 @@ metadata:
   name: hocs-toolbox
   labels:
     version: {{.VERSION}}
+  annotations:
+    downscaler/downtime: 'Mon-Fri 18:00-08:00 Europe/London'
 spec:
   replicas: {{.REPLICAS}}
   selector:
