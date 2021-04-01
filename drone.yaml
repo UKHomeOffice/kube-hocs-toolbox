@@ -1,0 +1,24 @@
+---
+kind: pipeline
+type: kubernetes
+name: deploy
+
+trigger:
+    target:
+      include:
+        - hocs-delta
+        - hocs-gamma
+        - hocs-qax
+        
+steps:
+  - name: deploy to not-prod
+    image: quay.io/ukhomeofficedigital/kd:v1.16.0
+    environment:
+      ENVIRONMENT: ${DRONE_DEPLOY_TO}
+      KUBE_SERVER: ${KUBE_SERVER{}}
+      KUBE_TOKEN:
+        from_secret: ${DRONE_DEPLOY_TO/-/_}
+    commands:
+      - ./deploy.sh
+      when:
+        event: promote

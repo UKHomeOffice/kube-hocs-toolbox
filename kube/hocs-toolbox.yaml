@@ -1,0 +1,141 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hocs-toolbox
+  labels:
+    version: {{.VERSION}}
+  annotations:
+    downscaler/downtime: 'Mon-Fri 18:00-08:00 Europe/London'
+spec:
+  replicas: {{.REPLICAS}}
+  selector:
+    matchLabels:
+      name: hocs-toolbox
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 2
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: hocs-toolbox
+        role: hocs-backend
+        version: {{.VERSION}}
+    spec:
+      containers:
+        - name: hocs-toolbox-query
+          image: 'docker.digital.homeoffice.gov.uk/hocs-psql-exec:build-50'
+          env:
+            - name: MODE
+              value: query
+            - name: HOCS_DB_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds
+                  key: endpoint
+            - name: HOCS_DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds
+                  key: port
+            - name: HOCS_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds
+                  key: db_name
+            - name: HOCS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds
+                  key: username
+            - name: HOCS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds
+                  key: password
+            - name: HOCS_INFO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds
+                  key: info_username
+            - name: HOCS_INFO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds
+                  key: info_password
+            - name: HOCS_AUDIT_DB_HOSTNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds-audit
+                  key: endpoint
+            - name: HOCS_AUDIT_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-rds-audit
+                  key: db_name
+            - name: HOCS_DOCS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: hocs-docs
+                  key: rds_user
+            - name: HOCS_DOCS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hocs-docs
+                  key: rds_password
+            - name: HOCS_CASEWORK_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: hocs-casework
+                  key: rds_user
+            - name: HOCS_CASEWORK_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hocs-casework
+                  key: rds_password
+            - name: HOCS_WORKFLOW_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: hocs-workflow
+                  key: rds_user
+            - name: HOCS_WORKFLOW_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hocs-workflow
+                  key: rds_password
+            - name: HOCS_AUDIT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: hocs-audit
+                  key: rds_user
+            - name: HOCS_AUDIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hocs-audit
+                  key: rds_password
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 50Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+          securityContext:
+            capabilities:
+              drop:
+                - SETUID
+                - SETGID
+            runAsNonRoot: true
+            procMount: Default
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      imagePullSecrets:
+        - name: registry-credentials
+      schedulerName: default-scheduler
