@@ -1,14 +1,7 @@
 kind: pipeline
 type: kubernetes
 name: deploy
-
-trigger:
-  target:
-    include:
-      - hocs-delta
-      - hocs-gamma
-      - hocs-qax
-
+  
 steps:
   - name: deploy to not-prod
     image: quay.io/ukhomeofficedigital/kd:v1.16.0
@@ -21,3 +14,9 @@ steps:
       - ./deploy.sh
     when:
       event: promote
+      target:
+        include:
+          - hocs-delta
+          - hocs-gamma
+          - hocs-qax
+
