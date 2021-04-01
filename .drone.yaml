@@ -4,11 +4,11 @@ type: kubernetes
 name: deploy
 
 trigger:
-    target:
-      include:
-        - hocs-delta
-        - hocs-gamma
-        - hocs-qax
+  target:
+    include:
+      - hocs-delta
+      - hocs-gamma
+      - hocs-qax
         
 steps:
   - name: deploy to not-prod
