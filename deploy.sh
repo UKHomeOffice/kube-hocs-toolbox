@@ -4,7 +4,6 @@ set -euo pipefail
 export KUBE_NAMESPACE=${ENVIRONMENT}
 export KUBE_TOKEN=${KUBE_TOKEN}
 export REPLICAS="1"
-export AWS_ACCOUNT_ID="449472082214"
 export CLUSTER_NAME="acp-notprod"
 export KUBE_SERVER="https://kube-api-notprod.notprod.acp.homeoffice.gov.uk"
 
