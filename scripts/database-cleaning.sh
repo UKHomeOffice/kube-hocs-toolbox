@@ -1,5 +1,5 @@
 #!/bin/bash
-echo 'Warning: this action will completely remove the database and all its contents. It cannot be undone!'
+echo 'Warning: this action will completely remove the database '${HOCS_DB_NAME}' and all its contents. It cannot be undone!'
 
 read -p 'Are you sure you want to remove the database (y/n)? ' yes_no
 
@@ -13,5 +13,5 @@ then
     psql -h${HOCS_DB_HOSTNAME} -U${HOCS_USERNAME} -d${HOCS_DB_NAME} -c "DROP SCHEMA IF EXISTS workflow CASCADE"
     psql -h${HOCS_DB_HOSTNAME} -U${HOCS_USERNAME} -d${HOCS_DB_NAME} -c "CREATE SCHEMA workflow"
 else
-    echo 'Aborted, no action was performed.'
+    echo 'Aborted, no action was performed.' >&2
 fi
