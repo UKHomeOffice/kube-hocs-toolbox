@@ -24,9 +24,16 @@ spec:
         role: hocs-backend
         version: {{.VERSION}}
     spec:
+      volumes:
+        - name: scripts-volume
+          configMap:
+            name: scripts
       containers:
         - name: initiation-scripts
           image: alpine
+          volumeMounts:
+            - mountPath: /scripts
+              name: scripts-volume
           env:
             - name: SCRIPT_HOME
               value: /scripts
