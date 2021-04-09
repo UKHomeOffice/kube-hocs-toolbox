@@ -24,6 +24,8 @@ spec:
         role: hocs-backend
         version: {{.VERSION}}
     spec:
+      volumes:
+        - name: scripts-volume
       containers:
         - name: initiation-scripts
           image: alpine
