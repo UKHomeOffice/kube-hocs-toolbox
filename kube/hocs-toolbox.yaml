@@ -41,7 +41,6 @@ spec:
               cp /scripts/*.sh /scripts
               echo "apply 'chmod +x' to /scripts/*.sh"
               chmod +x /scripts/*.sh
-          restartPolicy: Never
 
         - name: hocs-toolbox-query
           image: 'docker.digital.homeoffice.gov.uk/hocs-psql-exec:build-50'
