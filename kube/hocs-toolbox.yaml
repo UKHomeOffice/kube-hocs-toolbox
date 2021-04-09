@@ -25,7 +25,7 @@ spec:
         version: {{.VERSION}}
     spec:
       containers:
-        - name: initiation scripts
+        - name: initiation-scripts
           image: alpine
           volumeMounts:
             - mountPath: /scripts
