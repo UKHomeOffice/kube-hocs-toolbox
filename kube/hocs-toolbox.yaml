@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: hocs-toolbox-query
-          image: 'docker.digital.homeoffice.gov.uk/hocs-psql-exec:build-50'
+          image: 'quay.io/ukhomeofficedigital/hocs-toolbox'
           env:
             - name: MODE
               value: query
