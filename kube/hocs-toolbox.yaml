@@ -24,32 +24,9 @@ spec:
         role: hocs-backend
         version: {{.VERSION}}
     spec:
-      volumes:
-        - name: scripts-volume
-          configMap:
-            name: scripts
       containers:
-        - name: initiation-scripts
-          image: alpine
-          volumeMounts:
-            - mountPath: /scripts
-              name: scripts-volume
-          env:
-            - name: SCRIPT_HOME
-              value: /scripts
-          command:
-            - /bin/sh
-            - -c
-            - |
-              echo "Creating /scripts folder"
-              mkdir /scripts
-              echo "copy tool scripts to /scripts"
-              cp /scripts/*.sh /scripts
-              echo "apply 'chmod +x' to /scripts/*.sh"
-              chmod +x /scripts/*.sh
-
         - name: hocs-toolbox-query
-          image: 'docker.digital.homeoffice.gov.uk/hocs-psql-exec:build-50'
+          image: 'quay.io/ukhomeofficedigital/hocs-toolbox'
           env:
             - name: MODE
               value: query
