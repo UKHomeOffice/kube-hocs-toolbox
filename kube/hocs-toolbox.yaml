@@ -205,6 +205,11 @@ spec:
                 secretKeyRef:
                   name: {{.KUBE_NAMESPACE}}-trusted-s3
                   key: kms_key_id
+            - name: AWS_ACCOUNT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: hocs-queue-config
+                  key: AWS_ACCCOUNT_ID
           resources:
             limits:
               cpu: 100m
