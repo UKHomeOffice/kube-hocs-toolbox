@@ -176,13 +176,13 @@ spec:
             - name: S3_UNTRUSTED_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                name: {{.KUBE_NAMESPACE}}-untrusted-s3
-                key: access_key_id
+                  name: {{.KUBE_NAMESPACE}}-untrusted-s3
+                  key: access_key_id
             - name: S3_UNTRUSTED_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                name: {{.KUBE_NAMESPACE}}-untrusted-s3
-                key: secret_access_key
+                  name: {{.KUBE_NAMESPACE}}-untrusted-s3
+                  key: secret_access_key
             - name: S3_UNTRUSTED_KMS_KEY
               valueFrom:
                 secretKeyRef:
@@ -193,13 +193,13 @@ spec:
             - name: S3_TRUSTED_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                name: {{.KUBE_NAMESPACE}}-trusted-s3
-                key: access_key_id
+                  name: {{.KUBE_NAMESPACE}}-trusted-s3
+                  key: access_key_id
             - name: S3_TRUSTED_SECRET_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
-                name: {{.KUBE_NAMESPACE}}-trusted-s3
-                key: secret_access_key
+                  name: {{.KUBE_NAMESPACE}}-trusted-s3
+                  key: secret_access_key
             - name: S3_TRUSTED_KMS_KEY
               valueFrom:
                 secretKeyRef:
