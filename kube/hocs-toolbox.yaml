@@ -209,7 +209,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: hocs-queue-config
-                  key: AWS_ACCCOUNT_ID
+                  key: AWS_ACCOUNT_ID
           resources:
             limits:
               cpu: 100m
