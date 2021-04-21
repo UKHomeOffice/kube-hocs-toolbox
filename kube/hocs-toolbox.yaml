@@ -117,6 +117,11 @@ spec:
                 secretKeyRef:
                   name: hocs-audit
                   key: rds_password
+            - name: ELASTICSEARCH_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: {{.KUBE_NAMESPACE}}-elasticsearch
+                  key: endpoint
             - name: ELASTICSEARCH_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
