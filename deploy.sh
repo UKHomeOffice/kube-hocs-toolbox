@@ -7,7 +7,7 @@ export REPLICAS="1"
 export CLUSTER_NAME="acp-notprod"
 export KUBE_SERVER="https://kube-api-notprod.notprod.acp.homeoffice.gov.uk"
 
-export VALID_NAMESPACES=("hocs-gamma" "hocs-delta" "hocs-qax")
+export VALID_NAMESPACES=("hocs-gamma" "hocs-delta" "hocs-qax" "hocs-epsilon")
 if [[ ${VALID_NAMESPACES[*]} =~ $KUBE_NAMESPACE ]] ; then
    echo "Passed namespace check"
 else

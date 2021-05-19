@@ -19,4 +19,5 @@ steps:
           - hocs-delta
           - hocs-gamma
           - hocs-qax
+          - hocs-epsilon
 
